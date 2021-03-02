@@ -14,5 +14,5 @@ wss.on('connection', function connection(ws) {
 
   ws.send('Hello, client');
 });
-console.log('\x1b[42m\x1b[30m%s\x1b[0m', 'Web Socket Server running ... ');
+console.log('\x1b[0m\x1b[42m\x1b[30m%s\x1b[0m', ' Web Socket Server running ... ');
 // console.log(wss.address())
