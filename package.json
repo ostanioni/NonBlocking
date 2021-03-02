@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/HowProgrammingWorks/NonBlocking/issues"
   },
-  "homepage": "https://github.com/HowProgrammingWorks/NonBlocking#readme"
+  "homepage": "https://github.com/HowProgrammingWorks/NonBlocking#readme",
+  "devDependencies": {
+    "ws": "^7.4.3"
+  }
 }
