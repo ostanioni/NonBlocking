@@ -1,0 +1,19 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {    
+      "type": "typescript",
+      "label": "ts",
+      "tsconfig": "tsconfig.json",
+      "command": "tsc -w",
+      "options": {
+        "cwd": "${workspaceFolder}/src"
+      },
+      "problemMatcher": [ "$tsc" ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}

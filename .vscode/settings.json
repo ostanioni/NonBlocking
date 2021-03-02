@@ -1,0 +1,56 @@
+{
+  "git.ignoreLimitWarning": true,
+  "workbench.iconTheme": "vscode-great-icons",
+  "editor.fontSize": 23,
+  "explorer.confirmDelete": false,
+  "git.autofetch": true,
+  "terminal.integrated.fontSize": 19,
+  "emmet.showAbbreviationSuggestions": true,
+  "emmet.showExpandedAbbreviation": "always",
+  "[javascript]": {
+    // "editor.formatOnSave": true,
+    // "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[typescript]": {
+    //"editor.formatOnSave": true,
+    // "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "emmet.includeLanguages": {
+    "vue-html": "html",
+    "vue": "html",
+    "javascript": "javascriptreact"
+  },
+  "emmet.syntaxProfiles": {
+    "javascript": "jsx",
+    "xml": {
+      "attr_quotes": "single"
+    }
+  },
+  "editor.codeActionsOnSave": {
+    // "source.fixAll.eslint": true,
+    // "source.fixAll.stylelint": false
+  },
+  "editor.tabSize": 2,
+  "editor.formatOnSave": false,
+  // "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+  "typescript.tsdk": "./node_modules/typescript/lib",
+  // "tslint.enable": true,
+  "editor.detectIndentation": false,
+  "files.eol": "\n",
+  "editor.multiCursorModifier": "ctrlCmd",
+  "explorer.confirmDragAndDrop": false,
+  "files.autoSaveDelay": 60000,
+  // "eslint.run": "onSave",
+  // "eslint.probe": [
+  //  "javascript", "javascriptreact", "typescript", "typescriptreact", "html", "vue", "markdown"
+  // ],
+  //"eslint.workingDirectories": ["./"],
+  // "typescript.validate.enable": true,
+  // "javascript.validate.enable": true,
+  "files.exclude": {
+    "**/*.js": { "when": "$(basename).ts" },
+    "**/**.js": { "when": "$(basename).tsx" },
+    "**/**.jsx": { "when": "$(basename).tsx" }
+  }
+}
