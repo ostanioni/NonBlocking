@@ -14,21 +14,24 @@
     <noscript>
       <strong>We're sorry but works-and-days doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
-    <div id="app"></div>
+    <div id="App"></div>
     <script>
+      const appEl = document.getElementById('App');
       const socket = new WebSocket('ws://127.0.0.9:3009/');
       // Соединение открыто
-socket.addEventListener('open', function (event) {
-    socket.send('Hello Server!');
-});
+    socket.addEventListener('open', function (event) {
+      socket.send('Hello Server!');
+    });
+    
+    // Наблюдает за сообщениями
+    socket.addEventListener('message', function (event) {
+      // console.log('Message from server ', event.data);
+      appEl.innerText += event.data;
 
-// Наблюдает за сообщениями
-socket.addEventListener('message', function (event) {
-    console.log('Message from server ', event.data);
-}); 
+    }); 
       
     </script>
-    <a id="aaa" onclick="func();" href="#">Нажми меня</a>
+    
     <!-- built files will be auto injected -->
   </body>
 </html>
