@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--
+    <script src="https://unpkg.com/vue-i18n/dist/vue-i18n.js"></script>
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    -->
+    <title>works-and-days</title>
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but works-and-days doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="App"></div>
+    <script>
+      const appEl = document.getElementById('App');
+      const socket = new WebSocket('ws://127.0.0.9:3009/');
+      // Соединение открыто
+    socket.addEventListener('open', function (event) {
+      socket.send('Hello Server!');
+    });
+    
+    // Наблюдает за сообщениями
+    socket.addEventListener('message', function (event) {
+      // console.log('Message from server ', event.data);
+      appEl.innerText += event.data;
+
+    }); 
+      
+    </script>
+    
+    <!-- built files will be auto injected -->
+  </body>
+</html>
