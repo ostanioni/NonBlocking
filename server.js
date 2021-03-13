@@ -1,12 +1,35 @@
+const {readFileSync} = require('fs');
+// const https = require('https');
+const {createServer} = require('http');
 const WebSocket = require('ws');
 
 console.clear();
-const wss = new WebSocket.Server({ 
+/*
+const httpsServerOptions = {
+  hostname: '127.0.0.9',
+  port: 443,
+  // path: '/',
+  // method: 'GET',
+  cert: readFileSync('./cert/cert.pem'),
+  key: readFileSync('./cert/key.pem')
+};
+*/
+const httpServerOptions = {
+  hostname: '127.0.0.9',
   port: 3009,
-  host: '127.0.0.9'
-});
+  // path: '/',
+  // method: 'GET',
+}
+const httpServer = createServer(httpServerOptions);
 
-wss.on('connection', function connection(ws) {
+const wsServerOptions = {
+  host: '127.0.0.9',
+  port: 3019,
+  server: httpServer
+}
+const wsServer = new WebSocket.Server(wsServerOptions);
+
+wsServer.on('connection', function connection(ws) {
   ws.on('message', function incoming(msg) {
     ws.send(msg);
     // console.log('received: %s', message);
@@ -14,5 +37,6 @@ wss.on('connection', function connection(ws) {
 
   ws.send('Hello, client');
 });
+
 console.log('\x1b[0m\x1b[42m\x1b[30m%s\x1b[0m', ' Web Socket Server running ... ');
 // console.log(wss.address())

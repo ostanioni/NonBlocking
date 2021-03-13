@@ -17,7 +17,7 @@
     <div id="App"></div>
     <script>
       const appEl = document.getElementById('App');
-      const socket = new WebSocket('ws://127.0.0.9:3009/');
+      const socket = new WebSocket('ws://127.0.0.9:3019/');
       // Соединение открыто
     socket.addEventListener('open', function (event) {
       socket.send('Hello Server!');

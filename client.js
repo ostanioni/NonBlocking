@@ -1,7 +1,7 @@
 const WebSocket = require('ws');
 
 console.clear();
-const ws = new WebSocket('ws://127.0.0.9:3009', {
+const ws = new WebSocket('ws://127.0.0.9:3019', {
   perMessageDeflate: false
 });
 
