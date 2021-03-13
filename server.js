@@ -1,7 +1,8 @@
-const {readFileSync} = require('fs');
-// const https = require('https');
 const {createServer} = require('http');
 const WebSocket = require('ws');
+
+// const {readFileSync} = require('fs');
+// const https = require('https');
 
 console.clear();
 /*
@@ -39,4 +40,3 @@ wsServer.on('connection', function connection(ws) {
 });
 
 console.log('\x1b[0m\x1b[42m\x1b[30m%s\x1b[0m', ' Web Socket Server running ... ');
-// console.log(wss.address())
