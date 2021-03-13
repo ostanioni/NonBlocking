@@ -1,0 +1,23 @@
+{
+  "name": "async_js",
+  "version": "1.0.0",
+  "description": "[![Неблокирующее асинхронное итерирование](https://img.youtube.com/vi/wYA2cIRYLoA/0.jpg)](https://www.youtube.com/watch?v=wYA2cIRYLoA)",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HowProgrammingWorks/NonBlocking.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HowProgrammingWorks/NonBlocking/issues"
+  },
+  "homepage": "https://github.com/HowProgrammingWorks/NonBlocking#readme",
+  "devDependencies": {
+    "ws": "^7.4.3"
+  }
+}

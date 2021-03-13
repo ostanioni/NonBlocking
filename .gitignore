@@ -1,3 +1,5 @@
 node_modules
+.vscode
+vue
 *.log
 .DS_Store
