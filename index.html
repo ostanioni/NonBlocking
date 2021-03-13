@@ -4,8 +4,15 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism-coy.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/plugins/line-highlight/prism-line-highlight.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/plugins/line-numbers/prism-line-numbers.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/plugins/match-braces/prism-match-braces.min.css" rel="stylesheet" />
+    
+        
     <!--
-    <script src="https://unpkg.com/vue-i18n/dist/vue-i18n.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css" rel="stylesheet" />
+      <script src="https://unpkg.com/vue-i18n/dist/vue-i18n.js"></script>
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     -->
     <title>works-and-days</title>
@@ -29,9 +36,39 @@
       appEl.innerText += event.data;
 
     }); 
-      
     </script>
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/components/prism-javascript.min.js"></script>
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/prism.min.js"></script>
+    <!--
     
+    -->
     <!-- built files will be auto injected -->
+    <div class="cl" style="display:inline-block;">
+    <pre><code class="language-js">
+      'use strict';
+
+const N = 1000;
+const numbers = new Array(N).fill(1);
+
+setTimeout(() => {
+  console.log('\x1b[36m%s\x1b[0m', 'setTimeout(0) is done ... ');
+}, 0);
+
+console.time(`${N}-elements`);
+
+/* _________ 1 ________________*/
+numbers.forEach((item, i) => {
+  console.log(i);
+});
+/* ____________________________*/
+
+console.timeEnd(`${N}-elements`);
+
+console.time(`minTime`);
+setTimeout(() => false, 0);
+console.timeEnd(`minTime`);
+    </code></pre>
+  </div>
   </body>
 </html>

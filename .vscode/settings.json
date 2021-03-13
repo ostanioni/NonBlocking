@@ -1,10 +1,11 @@
 {
   "git.ignoreLimitWarning": true,
   "workbench.iconTheme": "vscode-great-icons",
+  "workbench.colorTheme": "Default Dark+",
   "editor.fontSize": 23,
-  "explorer.confirmDelete": false,
-  "git.autofetch": true,
   "terminal.integrated.fontSize": 19,
+  "explorer.confirmDelete": false,  
+  "git.autofetch": true,  
   "emmet.showAbbreviationSuggestions": true,
   "emmet.showExpandedAbbreviation": "always",
   "[javascript]": {
