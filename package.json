@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/HowProgrammingWorks/NonBlocking#readme",
   "devDependencies": {
+    "@types/node": "^14.14.34",
     "ws": "^7.4.3"
   }
 }
