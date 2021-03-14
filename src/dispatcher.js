@@ -16,10 +16,10 @@ on('syncStart', () => {
   log('m', 'Sync start: 0 μs ')
 })
 on('syncEnd', () => {
-  log('m', 'Sync end: ', diffTime(begin))
+  log('m', `Sync end:  ${diffTime(begin)}  `)
 })
 on('sync', () => {
-  log('b','-----')
+  log('b','--sync--')
 })
 on('async', () => {
   log('g','Async event: ', diffTime(begin));
