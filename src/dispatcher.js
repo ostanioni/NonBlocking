@@ -3,8 +3,10 @@ import log from './logger.js'
 import {  eachBlocking, 
           eachNonBlocking,
           forBlocking,
-          forNonBlocking
+          forNonBlocking,
+          eachOpt
         } from './loops.js'
+
 console.clear()
 // high resolution time 
 const begin = hrTime()
@@ -25,7 +27,7 @@ on('loopEnd', (...args) => {
 })
 on('loop', (...args) => {
   let msg = args.join('')
-  log('b','---Loop---', msg)
+  log('b','   Loop-', msg)
 })
 on('asyncBlock', (...args) => {
   let msg = args.join('')
@@ -36,12 +38,17 @@ on('asyncNonBlock', (...args) => {
   log('c', msg, 'Async: ', diffTime(begin));
 });
 
-// eachBlocking(loopConfig)
-// eachNonBlocking(loopConfig)
-// forBlocking(loopConfig)
+eachBlocking(loopConfig)
+eachNonBlocking(loopConfig)
+forBlocking(loopConfig)
 forNonBlocking(loopConfig)
-
-
+eachOpt({
+  'N': 100000,
+  'divisor': 10000,
+  'Emitter': Emitter,
+  'intervalTime': 1,
+  'intervalForAsync': 10
+})
 
 function on(event,func){
   Emitter.on(event,func)

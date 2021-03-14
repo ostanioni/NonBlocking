@@ -1,11 +1,13 @@
 'use strict';
 
+import { setImmediate } from 'timers';
 import log from './logger.js'
 
 export {  eachBlocking, 
           eachNonBlocking,
           forBlocking,
-          forNonBlocking
+          forNonBlocking,
+          eachOpt
         }
 
 /*|========================================|
@@ -19,12 +21,13 @@ function eachBlocking(loopConfig){
   Emitter.emit('loopStart', '1.')
     for (let i=0; i<N; i++) {
       if (i%divisor === 0){
-        Emitter.emit('loop', '1')
+        Emitter.emit('loop', '1---', divisor.toString(), ' iterations')
       }    
     }
   Emitter.emit('loopEnd', '1. ')
-  
-  setTimeout(()=>Emitter.emit('asyncBlock', '1.'),0)  
+  setImmediate(() => {
+    Emitter.emit('asyncBlock', '1.')
+   })
 }
 
 /*|========================================|
@@ -47,7 +50,7 @@ function eachBlocking(loopConfig){
           Emitter.emit('loopEnd', '2.')
         } else {
           if (i % divisor === 0) {
-            Emitter.emit('loop', '2')
+            Emitter.emit('loop', '2   ', divisor.toString(), ' iterations')
           }
           each(++i)
         }
@@ -63,9 +66,9 @@ function eachBlocking(loopConfig){
 
     const { N, divisor, Emitter } = loopConfig
 
-    setTimeout(() => {
-      Emitter.emit('asyncBlock', '3.')
-    }, 0);    
+    setImmediate(() => {
+      Emitter.emit('asyncBlock', '1.')
+     })  
     
     const range = {
       start: 1,
@@ -90,7 +93,7 @@ function eachBlocking(loopConfig){
 
       for await (const number of range) {
         if (i++%divisor === 0){
-          Emitter.emit('loop','3')
+          Emitter.emit('loop','3   ', divisor.toString(), ' iterations')
         }
         if (i === N){
           Emitter.emit('loopEnd', '3.')
@@ -119,15 +122,15 @@ function forNonBlocking(loopConfig){
     start: 1,
     end: N,
     [Symbol.asyncIterator]() {
-      let value = this.start;
+      let value = this.start
       return {
         next: () => new Promise(resolve => {
-          setTimeout(() => {
+          setImmediate(() => {
             resolve({
               value,
               done: value++ === this.end
             })
-          }, 0)
+          })
         })
       }
     }
@@ -137,7 +140,7 @@ function forNonBlocking(loopConfig){
 
   const IntervalId = setInterval(() => {
     Emitter.emit('asyncNonBlock', '4.')
-  }, 100);
+  }, 100)
 
   async function asyncFor() {
       
@@ -146,7 +149,7 @@ function forNonBlocking(loopConfig){
 
     for await (const number of range) {
       if (i++%divisor === 0){
-        Emitter.emit('loop', '4')
+        Emitter.emit('loop', '4   ', divisor.toString(), ' iterations')
       }
       if (i === N){
         Emitter.emit('loopEnd', '4.')
@@ -162,9 +165,45 @@ console.dir({
   symbols: Object.getOwnPropertySymbols(range),
 });
 */
-  
+/*|========================================|
+  |              5-EACH-OPT                |
+  |========================================|*/
+function eachOpt(loopConfig, interval=10){
+    
+  log('y', '5-EACH-OPT')
+    
+  const { N, divisor, Emitter, intervalTime, intervalForAsync } = loopConfig
 
+  const INTERVAL = interval
+
+  Emitter.emit('loopStart', '4.')
   
-  
-  
-  
+  const IntervalId = setInterval(() => {
+    Emitter.emit('asyncNonBlock', '5.')
+  }, intervalTime)
+
+  each()
+
+  function each() {
+    let i = 0      
+    const next = () => {
+      let begin = process.hrtime.bigint()
+      while (i <= N) {
+        let diff = (process.hrtime.bigint() - begin) / 1000000n
+        if (diff > intervalForAsync) {
+          setImmediate(next)
+          break
+        }
+        if (i++%divisor === 0){
+          Emitter.emit('loop', '5   ', divisor.toString(), ' iterations')
+         }
+        if (i === N){
+          Emitter.emit('loopEnd', '5.')
+          clearInterval(IntervalId)
+          break
+        }
+      }
+    }
+    next()
+  }
+}
