@@ -140,7 +140,7 @@ function forNonBlocking(loopConfig){
 
   const IntervalId = setInterval(() => {
     Emitter.emit('asyncNonBlock', '4.')
-  }, 100)
+  }, 10)
 
   async function asyncFor() {
       

@@ -38,9 +38,11 @@ on('asyncNonBlock', (...args) => {
   log('c', msg, 'Async: ', diffTime(begin));
 });
 
-eachBlocking(loopConfig)
-eachNonBlocking(loopConfig)
-forBlocking(loopConfig)
+
+
+// eachBlocking(loopConfig)
+// eachNonBlocking(loopConfig)
+// forBlocking(loopConfig)
 forNonBlocking(loopConfig)
 eachOpt({
   'N': 100000,
@@ -49,6 +51,10 @@ eachOpt({
   'intervalTime': 1,
   'intervalForAsync': 10
 })
+
+
+
+
 
 function on(event,func){
   Emitter.on(event,func)
