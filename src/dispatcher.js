@@ -11,11 +11,6 @@ console.clear()
 // high resolution time 
 const begin = hrTime()
 
-const loopConfig = {
-  'N': 1000,
-  'divisor': 100,
-  'Emitter': Emitter,
-}
 
 on('loopStart', (...args) => {
   let msg = args.join('')
@@ -38,7 +33,11 @@ on('asyncNonBlock', (...args) => {
   log('c', msg, 'Async: ', diffTime(begin));
 });
 
-
+const loopConfig = {
+  'N': 1000,
+  'divisor': 100,
+  'Emitter': Emitter,
+}
 
 // eachBlocking(loopConfig)
 // eachNonBlocking(loopConfig)
