@@ -35,7 +35,7 @@
   "editor.formatOnSave": false,
   // "editor.defaultFormatter": "dbaeumer.vscode-eslint",
   "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
-  "typescript.tsdk": "./node_modules/typescript/lib",
+  // "typescript.tsdk": "./node_modules/typescript/lib",
   // "tslint.enable": true,
   "editor.detectIndentation": false,
   "files.eol": "\n",
@@ -47,8 +47,8 @@
   //  "javascript", "javascriptreact", "typescript", "typescriptreact", "html", "vue", "markdown"
   // ],
   //"eslint.workingDirectories": ["./"],
-  // "typescript.validate.enable": true,
-  // "javascript.validate.enable": true,
+  "typescript.validate.enable": false,
+  "javascript.validate.enable": false,
   "files.exclude": {
     "**/*.js": { "when": "$(basename).ts" },
     "**/**.js": { "when": "$(basename).tsx" },
