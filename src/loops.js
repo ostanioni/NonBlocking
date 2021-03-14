@@ -10,12 +10,9 @@ function eachBlocking(N=null, divisor=100, Emitter){
   }
   Emitter.emit('start')
     for (let i=0; i<N; i++) {
-      if (i === N-1){
-      
-      }
       if (i%divisor === 0){
         Emitter.emit('sync')
-        // console.log('sync')
+         // console.log('sync')
       }    
     }
   Emitter.emit('end')

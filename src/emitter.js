@@ -1,6 +1,5 @@
 import EventEmitter from 'events'
 
-class MyEmitter extends EventEmitter {}
-const Emitter = new MyEmitter()
+// class MyEmitter extends EventEmitter {}
 
-export default Emitter
+export default new EventEmitter()
