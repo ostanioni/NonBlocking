@@ -25,10 +25,7 @@ setTimeout(() => {
 }, 0);
 
 (async () => {
-  const begin = process.hrtime.bigint();
   for await (const number of range) {
     console.log(number);
   }
-  const diff = (process.hrtime.bigint() - begin) / 1000000n;
-  console.log('Time(ms):', diff.toString());
 })();
