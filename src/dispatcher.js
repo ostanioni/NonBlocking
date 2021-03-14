@@ -1,63 +1,40 @@
 import Emitter from './emitter.js'
 import {eachBlocking} from './loops.js'
+import log from './logger.js'
 console.clear()
 
-const N = 10000
-const divisor = 1000
-
 const begin = hrTime()
-eachBlocking(N, divisor, Emitter)
 
-on('start', () => {
-  log('m', 'Start ...')
+const loopConfig = {
+  'N': 10000,
+  'divisor': 1000,
+  'Emitter': Emitter,
+  'time': begin
+}
+
+on('syncStart', () => {
+  log('m', 'Sync start: 0 μs ')
 })
-on('end', () => {
-  log('m', 'End ...')
+on('syncEnd', () => {
+  log('m', 'Sync end: ', diffTime(begin))
 })
 on('sync', () => {
-  log('b','Sync ...')
+  log('b','-----')
 })
 on('async', () => {
-  log('g','async event occurred!');
-  const diff = hrTime() - begin 
-  log('m','Time took: ', diff.toString(),'ms');
+  log('g','Async event: ', diffTime(begin));
+  log('c','Time took: ', diffTime(begin));
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+eachBlocking(loopConfig)
 
 function on(event,func){
   Emitter.on(event,func)
 }
-function log(color,...msgs){
-  const reducer = (accumulator, currentValue) => accumulator + currentValue;
-  let msg = msgs.reduce(reducer)
-  //let color = ''
-  switch(color){
-    case 'r': color = '\x1b[0m\x1b[41m\x1b[37m%s\x1b[0m';break;
-    case 'g': color = '\x1b[0m\x1b[42m\x1b[30m%s\x1b[0m';break;
-    case 'b': color = '\x1b[0m\x1b[44m\x1b[30m%s\x1b[0m';break;
-    case 'y': color = '\x1b[0m\x1b[43m\x1b[30m%s\x1b[0m';break;
-    case 'm': color = '\x1b[0m\x1b[45m\x1b[37m%s\x1b[0m';break;
-    case 'c': color = '\x1b[0m\x1b[46m\x1b[30m%s\x1b[0m';break;
-    default: break;
-  }
-  console.log(color,msg)
-}
+
 function hrTime(){
-  return process.hrtime.bigint() / 1000000n
+  return Math.round(Number(process.hrtime.bigint()) / 10000)
+}
+function diffTime(begin){
+  return (hrTime() - begin).toString() + 'μs'
 }

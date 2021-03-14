@@ -3,19 +3,20 @@
 /*|========================================|
   |          1-EACH_BLOCKING               |
   |========================================|*/
-function eachBlocking(N=null, divisor=100, Emitter){
+function eachBlocking(loopConfig){
+  const {N, divisor, Emitter, time} = loopConfig
   if ((N === null) || (Emitter === undefined)) {
     console.error('[1-each-blocking]Error: arguments wrong ...')
     return 1
   }
-  Emitter.emit('start')
+  Emitter.emit('syncStart')
     for (let i=0; i<N; i++) {
       if (i%divisor === 0){
         Emitter.emit('sync')
-         // console.log('sync')
+        // console.log('sync')
       }    
     }
-  Emitter.emit('end')
+  Emitter.emit('syncEnd')
   
   setTimeout(()=>Emitter.emit('async'),0)  
 }
