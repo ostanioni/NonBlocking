@@ -7,7 +7,8 @@ export {  eachBlocking,
           eachNonBlocking,
           forBlocking,
           forNonBlocking,
-          eachOpt
+          eachOpt,
+          forOpt
         }
 
 /*|========================================|
@@ -111,7 +112,6 @@ function eachBlocking(loopConfig){
 /*|========================================|
   |           4-FOR-NON-BLOCKING           |
   |========================================|*/
-
 function forNonBlocking(loopConfig){
   
   log('y', '4-FOR-NON-BLOCKING ')
@@ -168,15 +168,13 @@ console.dir({
 /*|========================================|
   |              5-EACH-OPT                |
   |========================================|*/
-function eachOpt(loopConfig, interval=10){
+function eachOpt(loopConfig){
     
   log('y', '5-EACH-OPT')
     
   const { N, divisor, Emitter, intervalTime, intervalForAsync } = loopConfig
 
-  const INTERVAL = interval
-
-  Emitter.emit('loopStart', '4.')
+  Emitter.emit('loopStart', '5.')
   
   const IntervalId = setInterval(() => {
     Emitter.emit('asyncNonBlock', '5.')
@@ -189,7 +187,7 @@ function eachOpt(loopConfig, interval=10){
     const next = () => {
       let begin = process.hrtime.bigint()
       while (i <= N) {
-        let diff = (process.hrtime.bigint() - begin) / 1000000n
+        const diff = (process.hrtime.bigint() - begin) / 1000000n
         if (diff > intervalForAsync) {
           setImmediate(next)
           break
@@ -207,3 +205,75 @@ function eachOpt(loopConfig, interval=10){
     next()
   }
 }
+/*|========================================|
+  |               6-FOR-OPT                |
+  |========================================|*/
+function forOpt(loopConfig){
+    
+  log('y', '6-FOR-OPT')
+      
+  const { N, divisor, Emitter, intervalTime, intervalForAsync } = loopConfig
+  
+  const range = {
+    start: 1,
+    end: N,
+    [Symbol.asyncIterator]() {
+      let value = this.start
+      let begin = process.hrtime.bigint()
+      return {
+        next: () => {          
+          const diff = (process.hrtime.bigint() - begin) / 1000000n
+          if (diff > intervalForAsync) {
+            return new Promise(resolve => {
+              setImmediate(() => {
+                let begin = process.hrtime.bigint()
+                resolve({
+                  value,
+                  done: value++ === this.end +1
+                })
+              })
+            })
+          }
+          return Promise.resolve({
+            value,
+            done: value++ === this.end + 1
+          })
+        }
+      }
+    }
+  }
+  const IntervalId = setInterval(() => {
+    Emitter.emit('asyncNonBlock', '6.')
+  }, intervalTime)
+
+  asyncFor()
+  
+  async function asyncFor() {
+      
+    let i = range.start
+    Emitter.emit('loopStart', '6.')
+
+    for await (const number of range) {
+      if (i++%divisor === 0){
+        Emitter.emit('loop', '6   ', divisor.toString(), ' iterations')
+      }
+      if (i === N){
+        Emitter.emit('loopEnd', '6.')
+        clearInterval(IntervalId)
+        break
+      }
+    }
+  }
+}
+/*  
+  console.dir({
+    range,
+    names: Object.getOwnPropertyNames(range),
+    symbols: Object.getOwnPropertySymbols(range),
+  });
+  */
+/*|========================================|
+  |              7-ASYNC-ARRAY             |
+  |========================================|*/
+  
+  

@@ -4,7 +4,8 @@ import {  eachBlocking,
           eachNonBlocking,
           forBlocking,
           forNonBlocking,
-          eachOpt
+          eachOpt,
+          forOpt
         } from './loops.js'
 
 console.clear()
@@ -42,12 +43,19 @@ const loopConfig = {
 // eachBlocking(loopConfig)
 // eachNonBlocking(loopConfig)
 // forBlocking(loopConfig)
-forNonBlocking(loopConfig)
-eachOpt({
+//forNonBlocking(loopConfig)
+/*eachOpt({
   'N': 100000,
   'divisor': 10000,
   'Emitter': Emitter,
   'intervalTime': 1,
+  'intervalForAsync': 10
+})*/
+forOpt({
+  'N': 100000,
+  'divisor': 10000,
+  'Emitter': Emitter,
+  'intervalTime': 50,
   'intervalForAsync': 10
 })
 
