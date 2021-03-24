@@ -40,17 +40,17 @@ const loopConfig = {
   'Emitter': Emitter,
 }
 
-// eachBlocking(loopConfig)
-// eachNonBlocking(loopConfig)
-// forBlocking(loopConfig)
-//forNonBlocking(loopConfig)
-/*eachOpt({
+eachBlocking(loopConfig)
+eachNonBlocking(loopConfig)
+forBlocking(loopConfig)
+forNonBlocking(loopConfig)
+eachOpt({
   'N': 100000,
   'divisor': 10000,
   'Emitter': Emitter,
   'intervalTime': 1,
   'intervalForAsync': 10
-})*/
+})
 forOpt({
   'N': 100000,
   'divisor': 10000,
