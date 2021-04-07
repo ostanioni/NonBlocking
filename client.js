@@ -1,4 +1,4 @@
-const WebSocket = require('ws');
+import WebSocket from 'ws'
 
 console.clear();
 const ws = new WebSocket('ws://127.0.0.9:3019', {

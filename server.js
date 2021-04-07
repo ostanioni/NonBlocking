@@ -1,5 +1,5 @@
-const {createServer} = require('http');
-const WebSocket = require('ws');
+import {createServer} from 'http'
+import WebSocket from 'ws'
 
 // const {readFileSync} = require('fs');
 // const https = require('https');
