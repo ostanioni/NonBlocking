@@ -60,9 +60,6 @@ forOpt({
 })
 
 
-
-
-
 function on(event,func){
   Emitter.on(event,func)
 }
